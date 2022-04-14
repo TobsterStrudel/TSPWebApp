@@ -16,43 +16,6 @@
 
 <script src="https://d3js.org/d3.v4.js"></script>
 
-<script type='text/javascript'>
-    var svg = d3.select("body").append("svg")
-        .attr("width", 500)
-        .attr("height", 500)
-        .style("border", "1px dashed");
-    d3.select("body").insert("div", "svg").append("button").text("Export").on("click", exportGraph);
-    function exportGraph() {
-        var cxcy = [];
-        d3.selectAll("circle").each(function () {
-            cxcy.push([d3.select(this).attr("cx"), d3.select(this).attr("cy")]);
-        });
-        console.log(cxcy);
-    }
-    function reset() {
-
-    }
-    svg.on("click", svgClick);
-    var prevClickLoc = [0,0];
-    var count = 0;
-    document.getElementById("clicks").innerHTML = count;
-    function svgClick() {
-        d3.event.stopPropagation();
-        var coords = d3.mouse(this);
-        var x = coords[0];
-        var y = coords[1];
-        if (x !== prevClickLoc[0] && y !== prevClickLoc[1]){
-            svg.append("circle").attr("r", 3)
-                .attr("cx", x.toFixed(2))
-                .attr("cy", y.toFixed(2))
-                .style("fill", "blue")
-                .style("stroke", "black")
-                .style("stroke-width", "2px");
-            prevClickLoc = coords;
-            count+=1;
-        }
-    }
-    d3.select("body").insert("div", "svg").append("button").text("Reset").on("click", reset);
-</script>
-<button type="button" onClick="onClick()">Click me</button>
-<p>Clicks: <a id="clicks">0</a></p>
+<script src="plot.js"></script>
+<script src="NearestNeighbor.js"></script>
+<button onclick="nearestNeighbor(points)">Nearest Neighbor</button>
