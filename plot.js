@@ -42,7 +42,7 @@ function svgClick() {
             .attr("x", x+10)
             .attr("y", y-10)
             .style("style", "label")
-            .text(count+1);
+            .text(count);
 
         prevClickLoc = coords;
         count+=1;
