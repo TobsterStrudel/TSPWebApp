@@ -3,7 +3,6 @@ var svg = d3.select("body").append("svg")
     .attr("height", 500)
     .style("border", "1px dashed");
 var points;
-d3.select("body").insert("div", "svg").append("button").text("Export").on("click", exportGraph);
 d3.select("body").insert("div", "svg").append("button").text("Reset").on("click", reset);
 function exportGraph() {
     var cxcy = [];
@@ -14,6 +13,10 @@ function exportGraph() {
 }
 function reset() {
     d3.selectAll("circle").remove();
+    d3.selectAll("text").remove();
+    count = 0;
+    document.getElementById("pointsCount").innerHTML = "Points: " + count;
+    document.getElementById("path").innerHTML = "Path: ";
 }
 svg.on("click", svgClick);
 var prevClickLoc = [0,0];
@@ -31,8 +34,19 @@ function svgClick() {
             .style("fill", "blue")
             .style("stroke", "black")
             .style("stroke-width", "2px");
+
+        svg.append("text")
+            .style("fill", "black")
+            .style("font-size", "14px")
+            .attr("dy", ".35em")
+            .attr("x", x+10)
+            .attr("y", y-10)
+            .style("style", "label")
+            .text(count+1);
+
         prevClickLoc = coords;
         count+=1;
+        document.getElementById("pointsCount").innerHTML = "Points: " + count;
         exportGraph();
     }
 }
