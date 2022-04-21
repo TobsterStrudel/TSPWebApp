@@ -23,6 +23,7 @@ function twoApprox(points){
     let current = graph.get(0);
     selected[0] = true;
     let mst = [];
+    mst.push(0);
     while(edges < points.length - 1){
         let min = Number.MAX_VALUE; //or I guess it could be 500000 since the window is 500 x 500
         x = 0;
@@ -31,23 +32,22 @@ function twoApprox(points){
         for(let i = 0; i < points.length; i++){
             if(selected[i]){
                 for(let j = 0; j < points.length; j++){
-                    if(!selected[j] && graph.get(i)[j][1] !== 0){
-                        if(min > graph.get(i)[j][1]){
-                            min = graph.get(i)[j][1];
-                            console.log("min: " + graph.get(i)[j]);
+                    let current = parseInt(graph.get(i)[j][1]);
+                    if(!selected[j] && current !== 0){
+                        if(current < min){
+                            min = current;
                             x = i;
                             y = j;
                         }
                     }
                 }
             }
-
         }
         console.log(x + " - " + y + " - " + graph.get(x)[y][1]);
-
+        mst.push(graph.get(x)[y][0]);
         selected[y] = true;
         edges++;
     }
-
+    console.log(mst);
 
 }
