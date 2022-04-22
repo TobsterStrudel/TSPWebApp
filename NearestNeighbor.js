@@ -31,6 +31,5 @@ function nearestNeighbor(points){
         i = map.get(closest);
     }
     pathIds.push(1);
-    console.log("pathIds: " + pathIds);
     document.getElementById("path").innerHTML = "Path: " + pathIds
 }
