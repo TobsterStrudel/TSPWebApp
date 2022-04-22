@@ -3,18 +3,7 @@ var path = [];
 
 function twoApprox(points){
     path = [];
-    const graph = new Map();
-    for(let i = 0; i < points.length; i++){
-        let temp = [];
-        for(let j = 0; j < points.length; j++){
-            if(i !== j){
-                temp.push([j, squaredDistance(points[i], points[j]).toFixed(0)]);
-            }else{
-                temp.push([j,0]);
-            }
-        }
-        graph.set(i, temp);
-    }
+    const graph = createGraph(points);
     let mst = prims(graph);
 
     adj = Array.from(Array(points.length).fill(0), () => new Array(points.length).fill(0));
@@ -70,4 +59,19 @@ function prims(graph){
         edges++;
     }
     return mst;
+}
+function createGraph(points){
+    const graph = new Map();
+    for(let i = 0; i < points.length; i++){
+        let temp = [];
+        for(let j = 0; j < points.length; j++){
+            if(i !== j){
+                temp.push([j, squaredDistance(points[i], points[j]).toFixed(0)]);
+            }else{
+                temp.push([j,0]);
+            }
+        }
+        graph.set(i, temp);
+    }
+    return graph;
 }
