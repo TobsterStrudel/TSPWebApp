@@ -5,6 +5,7 @@ var svg = d3.select("body").append("svg")
 var points;
 d3.select("body").insert("div", "svg").append("button").text("Reset").on("click", reset);
 d3.select("body").insert("div", "svg").append("button").text("Undo").on("click", undo);
+d3.select("body").insert("div", "svg").append("button").text("10 Random Points").on("click", randomPoints);
 function exportGraph() {
     var cxcy = [];
     d3.selectAll("circle").each(function () {
@@ -20,6 +21,13 @@ function undo(){
         document.getElementById("pointsCount").innerHTML = "Points: " + count;
     }
 }
+function randomPoints(){
+    for(let i = 0; i < 10; i++){
+        flag = true;
+        svgClick([Math.random() * 500, Math.random() * 500]);
+    }
+}
+var flag;
 function reset() {
     d3.selectAll("circle").remove();
     d3.selectAll("text").remove();
@@ -31,11 +39,20 @@ svg.on("click", svgClick);
 var prevClickLoc = [0,0];
 var count = 0;
 // document.getElementById("clicks").innerHTML = count;
-function svgClick() {
-    d3.event.stopPropagation();
-    var coords = d3.mouse(this);
-    var x = coords[0];
-    var y = coords[1];
+function svgClick(temp) {
+    var coords, x, y;
+    if(!flag){
+        d3.event.stopPropagation();
+        coords = d3.mouse(this);
+        x = coords[0];
+        y = coords[1];
+    }else{
+        d3.event.stopPropagation();
+        coords = temp
+        x = coords[0];
+        y = coords[1];
+    }
+
     if (x !== prevClickLoc[0] && y !== prevClickLoc[1]){
         svg.append("circle").attr("r", 3)
             .attr("cx", x.toFixed(2))
@@ -57,5 +74,6 @@ function svgClick() {
         count++;
         document.getElementById("pointsCount").innerHTML = "Points: " + count;
         exportGraph();
+        flag = false;
     }
 }
