@@ -3,11 +3,7 @@ var path = [];
 
 function twoApprox(points){
     path = [];
-    const map = new Map();
     const graph = new Map();
-    for(let i = 0; i < points.length; i++){
-        map.set(points[i], i);
-    }
     for(let i = 0; i < points.length; i++){
         let temp = [];
         for(let j = 0; j < points.length; j++){
