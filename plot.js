@@ -79,3 +79,13 @@ function svgClick(temp) {
         flag = false;
     }
 }
+function makeArrow(a, b){
+    svg.append("line")
+        .attr("x1",a[0])
+        .attr("y1",a[1])
+        .attr("x2",b[0])
+        .attr("y2",b[1])
+        .attr("stroke","blue")
+        .attr("stroke-width",2)
+        .attr("marker-end","url(#arrow)");
+}
