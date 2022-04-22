@@ -1,13 +1,9 @@
-class TreeNode{
-    constructor(value) {
-        this.value = value;
-        this.children = [];
-    }
-}
+var adj;
+var path = [];
 function twoApprox(points){
+    path = [];
     const map = new Map();
     const graph = new Map();
-    var pathIds = [];
     for(let i = 0; i < points.length; i++){
         map.set(points[i], i);
     }
@@ -21,12 +17,10 @@ function twoApprox(points){
             }
         }
         graph.set(i, temp);
-        console.log(graph.get(i));
     }
     let x, y;
     let edges = 0;
     let selected = new Array(points.length).fill(false);
-    let current = graph.get(0);
     selected[0] = true;
     let mst = [];
     while(edges < points.length - 1){
@@ -48,13 +42,32 @@ function twoApprox(points){
                 }
             }
         }
-        console.log(x + " - " + y + " - " + graph.get(x)[y][1]);
         mst.push([x,y]);
         selected[y] = true;
         edges++;
     }
-    console.log(mst);
 
-    const root = new TreeNode(mst[0][0]);
+    adj = Array.from(Array(points.length).fill(0), () => new Array(points.length).fill(0));
 
+    for(let i = 0; i < mst.length; i++){
+        addEdge(mst[i][0], mst[i][1])
+    }
+    let visited = new Array(points.length).fill(false);
+    dfs(0,visited);
+    path.push(0);
+    document.getElementById("path").innerHTML = "Path: " + path;
+}
+function dfs(start, visited){
+    path.push(start);
+    visited[start] = true;
+
+    for(let i = 0; i < adj[start].length; i++){
+        if(adj[start][i] === 1 && !visited[i])
+            dfs(i, visited);
+    }
+}
+function addEdge(x, y)
+{
+    adj[x][y] = 1;
+    adj[y][x] = 1;
 }
