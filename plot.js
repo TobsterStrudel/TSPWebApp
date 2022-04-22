@@ -4,12 +4,21 @@ var svg = d3.select("body").append("svg")
     .style("border", "1px dashed");
 var points;
 d3.select("body").insert("div", "svg").append("button").text("Reset").on("click", reset);
+d3.select("body").insert("div", "svg").append("button").text("Undo").on("click", undo);
 function exportGraph() {
     var cxcy = [];
     d3.selectAll("circle").each(function () {
         cxcy.push([d3.select(this).attr("cx"), d3.select(this).attr("cy")]);
     });
     points = cxcy;
+}
+function undo(){
+    if(count !== 0){
+        svg.select("circle").remove();
+        svg.select("text").remove();
+        count--;
+        document.getElementById("pointsCount").innerHTML = "Points: " + count;
+    }
 }
 function reset() {
     d3.selectAll("circle").remove();
@@ -45,7 +54,7 @@ function svgClick() {
             .text(count);
 
         prevClickLoc = coords;
-        count+=1;
+        count++;
         document.getElementById("pointsCount").innerHTML = "Points: " + count;
         exportGraph();
     }
