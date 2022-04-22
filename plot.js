@@ -6,6 +6,7 @@ var points;
 d3.select("body").insert("div", "svg").append("button").text("Reset").on("click", reset);
 d3.select("body").insert("div", "svg").append("button").text("Undo").on("click", undo);
 d3.select("body").insert("div", "svg").append("button").text("10 Random Points").on("click", randomPoints);
+
 function exportGraph() {
     var cxcy = [];
     d3.selectAll("circle").each(function () {
@@ -31,6 +32,7 @@ var flag;
 function reset() {
     d3.selectAll("circle").remove();
     d3.selectAll("text").remove();
+    d3.selectAll("line").remove();
     count = 0;
     document.getElementById("pointsCount").innerHTML = "Points: " + count;
     document.getElementById("path").innerHTML = "Path: ";

@@ -2,6 +2,10 @@ var adj;
 var path = [];
 
 function twoApprox(points){
+    const idsToPointsMap = new Map();
+    for(let i = 0; i < points.length; i++){
+        idsToPointsMap.set(i, points[i]);
+    }
     path = [];
     const graph = createGraph(points);
     let mst = prims(graph);
@@ -14,7 +18,11 @@ function twoApprox(points){
     let visited = new Array(points.length).fill(false);
     dfs(0,visited);
     path.push(1);
+    d3.selectAll("line").remove();
     document.getElementById("path").innerHTML = "Path: " + path;
+    for(let i = 0; i < path.length-1; i++){
+        makeArrow(idsToPointsMap.get(path[i]-1), idsToPointsMap.get(path[i+1]-1));
+    }
 }
 function dfs(start, visited){
     path.push(start+1);
