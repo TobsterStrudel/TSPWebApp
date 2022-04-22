@@ -7,9 +7,9 @@
     <dt style="font-size:20px">Nearest Neighbor Algorithm</dt>
     <dd>The path is decided by which point is closest to the current point. Runs in O(n^2) time, doesn't find most efficient path.</dd>
     <dt style="font-size:20px">2-approx Algorithm</dt>
-    <dd>Construct path by creating an MST (Prim's, Kruskal's, etc.) then performing a preorder traversal.</dd>
+    <dd>Construct path by creating an MST (Prim's was used in this example) then performing depth-first search. O(n^2)</dd>
     <dt style="font-size:20px">1.5-approx Algorithm (Christofides)</dt>
-    <dd>not sure yet</dd>
+    <dd>Construct path by creating an MST, find a minimum-cost perfect matching for odd-degree vertices, add edges and form an Eulerian circuit, and then remove all repeated vertices.</dd>
 </dl>
 
 <svg id="dataviz_area" height=200 width=450></svg>
