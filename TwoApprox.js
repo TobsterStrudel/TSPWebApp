@@ -1,7 +1,8 @@
 let adj;
-const path = [];
+var path;
 
 function twoApprox(points){
+    path = [];
     const idsToPointsMap = new Map();
     for(let i = 0; i < points.length; i++){
         idsToPointsMap.set(i, points[i]);
