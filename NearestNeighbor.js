@@ -1,5 +1,5 @@
 
-function nearestNeighbor(points){
+async function nearestNeighbor(points){
     const pointstoIdsMap = new Map();
     const idsToPointsMap = new Map();
 
@@ -26,5 +26,6 @@ function nearestNeighbor(points){
     document.getElementById("path").innerHTML = "Path: " + pathIds
     for(let i = 0; i < pathIds.length-1; i++){
         makeArrow(idsToPointsMap.get(pathIds[i]-1), idsToPointsMap.get(pathIds[i+1]-1));
+        await sleep(900);
     }
 }

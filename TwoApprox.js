@@ -1,7 +1,7 @@
 let adj;
 var path;
 
-function twoApprox(points){
+async function twoApprox(points){
     path = [];
     const idsToPointsMap = new Map();
     for(let i = 0; i < points.length; i++){
@@ -24,5 +24,6 @@ function twoApprox(points){
     document.getElementById("path").innerHTML = "Path: " + path;
     for(let i = 0; i < path.length-1; i++){ //send arrows to UI
         makeArrow(idsToPointsMap.get(path[i]-1), idsToPointsMap.get(path[i+1]-1));
+        await sleep(900);
     }
 }
