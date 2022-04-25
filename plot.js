@@ -4,7 +4,7 @@ var svg = d3.select("body").append("svg")
     .style("border", "1px dashed");
 var points;
 d3.select("body").insert("div", "svg").append("button").text("Reset").on("click", reset);
-d3.select("body").insert("div", "svg").append("button").text("Undo").on("click", undo);
+// d3.select("body").insert("div", "svg").append("button").text("Undo").on("click", undo);
 d3.select("body").insert("div", "svg").append("button").text("10 Random Points").on("click", randomPoints);
 
 function exportGraph() {
@@ -24,6 +24,13 @@ function undo(){
 }
 function randomPoints(){
     for(let i = 0; i < 10; i++){
+        flag = true;
+        svgClick([Math.random() * 500, Math.random() * 500]);
+    }
+}
+function randomPointsCustom(){
+    let n = parseInt(document.getElementById("numPoints").value);
+    for(let i = 0; i < n; i++){
         flag = true;
         svgClick([Math.random() * 500, Math.random() * 500]);
     }
@@ -59,7 +66,6 @@ function svgClick(temp) {
         x = coords[0];
         y = coords[1];
     }else{
-        d3.event.stopPropagation();
         coords = temp
         x = coords[0];
         y = coords[1];

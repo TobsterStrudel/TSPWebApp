@@ -12,6 +12,9 @@
     <dd>Construct path by creating an MST, find a minimum-cost perfect matching for odd-degree vertices, add edges and form an Eulerian circuit, and then remove all repeated vertices.</dd>
 </dl>
 
+<input type="text" id="numPoints" value="">
+<button onclick="randomPointsCustom()">Any Number of Points</button>
+
 <svg id="dataviz_area" height=200 width=450>
     <defs>
         <marker
@@ -31,19 +34,18 @@
 <script src="https://d3js.org/d3.v4.js"></script>
 
 <script src="plot.js"></script>
+
 <script src="algorithms.js"></script>
 <script src="NearestNeighbor.js"></script>
 <script src="TwoApprox.js"></script>
 <script src="ChristofidesApprox.js"></script>
+
 <p></p>
 <button onclick="nearestNeighbor(points)">Nearest Neighbor</button>
 <p></p>
-<button onclick="{
-    twoApprox(points)
-    runTrue();
-}">2-Approx</button>
+<button onclick="twoApprox(points)">2-Approx</button>
 <p></p>
-<!--<button onclick="christofides(points)">1.5-Approx</button>-->
+<button onclick="christofides(points)">1.5-Approx</button>
 
 <body>
     <p id="pointsCount">Points: 0</p>
