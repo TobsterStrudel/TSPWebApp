@@ -2,11 +2,9 @@ let adj;
 var path;
 
 async function twoApprox(points){
-    if(typeof points === 'undefined'){
+    if(typeof points === 'undefined' || points === null || points.length === 0){
         return
     }
-    console.log(points);
-    console.log(points.length)
     path = [];
     const idsToPointsMap = new Map();
     for(let i = 0; i < points.length; i++){

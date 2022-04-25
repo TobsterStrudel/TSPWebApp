@@ -1,6 +1,6 @@
 
 async function nearestNeighbor(points){
-    if(typeof points === 'undefined'){
+    if(typeof points === 'undefined' || points === null || points.length === 0){
         return
     }
     const pointstoIdsMap = new Map();
