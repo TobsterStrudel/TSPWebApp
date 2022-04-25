@@ -60,14 +60,31 @@ function createGraph(points){
 function squaredDistance(a, b){
     return (b[0] - a[0])**2 + (b[1] - a[1])**2
 }
-function closestPoint(current, points, visited){
+function closestPoint(current, points, visited) {
     let min = Number.MAX_VALUE;
-    let closest;
-    for(let i = 0; i < points.length; i++) {
+    let closest = [];
+    for (let i = 0; i < points.length; i++) {
         if (squaredDistance(current, points[i]) < min && squaredDistance(current, points[i]) !== 0 && !visited[i]) {
             min = squaredDistance(current, points[i]);
             closest = points[i];
         }
     }
     return closest;
+}
+function shuffle(array) {
+    let currentIndex = array.length,  randomIndex;
+
+    while (currentIndex !== 0) {
+
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex], array[currentIndex]];
+    }
+
+    return array;
+}
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
