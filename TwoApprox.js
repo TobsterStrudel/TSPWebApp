@@ -16,7 +16,6 @@ async function twoApprox(points){
     }
     let mst = prims(graph);
     for(let i = 0; i < mst.length; i++){
-        console.log(idsToPointsMap.get(mst[i][0]))
         makeLine(idsToPointsMap.get(mst[i][0]), idsToPointsMap.get(mst[i][1]), "green", 3);
         await sleep(500);
     }
@@ -31,7 +30,16 @@ async function twoApprox(points){
     dfs(0,visited); //result is stored in path (global variable)
     path.push(1);
     d3.selectAll("line").remove(); //remove any lines made by other functions before printing more
+    let distance = 0.0;
+    console.log(path);
+    for(let i = 0; i < path.length-1; i++){
+        console.log(i)
+        console.log(path[i])
+        console.log(idsToPointsMap.get(path[i]-1));
+        distance += Math.sqrt(squaredDistance(idsToPointsMap.get(path[i]-1), idsToPointsMap.get(path[i+1]-1)));
+    }
     document.getElementById("path").innerHTML = "Path: " + path;
+    document.getElementById("distance").innerHTML = "Total Distance: " + distance.toFixed(2);
     for(let i = 0; i < path.length-1; i++){ //send arrows to UI
         makeArrow(idsToPointsMap.get(path[i]-1), idsToPointsMap.get(path[i+1]-1), "blue");
         await sleep(900);

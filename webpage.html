@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Add a title -->
+<meta charset="utf-8" />
 <h1>Traveling Salesman Problem</h1>
 
 <p>An implementation of three different TSP approximation algorithms</p>
@@ -35,11 +35,15 @@
 <script src="NearestNeighbor.js"></script>
 <script src="TwoApprox.js"></script>
 <script src="ChristofidesApprox.js"></script>
+<p></p>
 <button onclick="nearestNeighbor(points)">Nearest Neighbor</button>
+<p></p>
 <button onclick="twoApprox(points)">2-Approx</button>
+<p></p>
 <button onclick="christofides(points)">1.5-Approx</button>
 
 <body>
     <p id="pointsCount">Points: 0</p>
     <p id="path">Path: </p>
+    <p id="distance">Total Distance: </p>
 </body>
