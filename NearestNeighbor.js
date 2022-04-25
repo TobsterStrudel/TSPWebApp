@@ -1,5 +1,8 @@
 
 async function nearestNeighbor(points){
+    if(typeof points === 'undefined'){
+        return
+    }
     const pointstoIdsMap = new Map();
     const idsToPointsMap = new Map();
 
@@ -17,11 +20,15 @@ async function nearestNeighbor(points){
     let last = points[0];
     let distance = 0.0;
     while(pathIds.length < points.length){ // O(n)
+        if(runStatus() === false){
+            break;
+        }
         for(let j = 0; j < points.length; j++){
+
             if(pointstoIdsMap.get(points[j]) === pointstoIdsMap.get(last)){
             }else{
                 makeLine(points[i], points[j], "red", 2);
-                await sleep(20);
+                await sleep(100);
             }
         }
         visited[i] = true;

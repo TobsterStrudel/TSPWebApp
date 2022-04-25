@@ -2,6 +2,11 @@ let adj;
 var path;
 
 async function twoApprox(points){
+    if(typeof points === 'undefined'){
+        return
+    }
+    console.log(points);
+    console.log(points.length)
     path = [];
     const idsToPointsMap = new Map();
     for(let i = 0; i < points.length; i++){
@@ -12,11 +17,14 @@ async function twoApprox(points){
 
     for(let i = 0; i < graph.size; i++){
         for(let j = 0; j < graph.size; j++){
-            makeLine(points[i], points[j], "red");
+            makeLine(points[i], points[j], "red", 1);
         }
     }
     let mst = prims(graph);
     for(let i = 0; i < mst.length; i++){
+        if(runStatus() === false){
+            break;
+        }
         makeLine(idsToPointsMap.get(mst[i][0]), idsToPointsMap.get(mst[i][1]), "green", 3);
         await sleep(500);
     }
