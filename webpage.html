@@ -1,15 +1,31 @@
 <!DOCTYPE html>
 <meta charset="utf-8" />
+<html>
 <h1>Traveling Salesman Problem</h1>
 
 <p>An implementation of three different TSP approximation algorithms</p>
 <dl>
     <dt style="font-size:20px">Nearest Neighbor Algorithm</dt>
-    <dd>The path is decided by which point is closest to the current point. Runs in O(n^2) time, doesn't find most efficient path.</dd>
+    <dd>The path is decided by which point is closest to the current point. Runs in O(n<sup>2</sup>) time, doesn't find most efficient path.</dd><br>
+    <dd>nearestNeighbor(<i>points</i>)<br>
+        &emsp;Stack <i>path</i><br>
+        &emsp;boolean <i>visited</i>[<i>points</i>.size] populated with false<br>
+        &emsp;<i>path</i>.push(1)<br>
+        &emsp;<i>i</i> = 0<br>
+        &emsp;while (<i>path</i>.size < <i>points</i>.size)<br>
+        &emsp;&emsp;<i>visited</i>[<i>i</i>] = true<br>
+        &emsp;&emsp;<i>closest</i> = closest point to <i>points</i>[<i>i</i>]<br>
+        &emsp;&emsp;<i>path</i>.push(<i>closest</i>)<br>
+        &emsp;&emsp;<i>i</i> = <i>closest</i><br>
+        <i>path</i>.push(1)<br>
+            return <i>path</i><br><br>
+
+
+    </dd>
     <dt style="font-size:20px">2-approx Algorithm</dt>
-    <dd>Construct path by creating an MST (Prim's was used in this example) then performing depth-first search. O(n^2)</dd>
+    <dd>Construct path by creating an MST (Prim's was used in this example) then performing depth-first search. O(n<sup>2</sup>)</dd>
     <dt style="font-size:20px">1.5-approx Algorithm (Christofides)</dt>
-    <dd>Construct path by creating an MST, find a minimum-cost perfect matching for odd-degree vertices, add edges and form an Eulerian circuit, and then remove all repeated vertices.</dd>
+    <dd>Construct path by creating an MST, find a minimum-cost perfect matching for odd-degree vertices, add edges and form an Eulerian circuit, and then remove all repeated vertices. O(nlogn<sup>3</sup>)</dd>
 </dl>
 
 <input type="text" id="numPoints" value="">
@@ -52,3 +68,4 @@
     <p id="path">Path: </p>
     <p id="distance">Total Distance: </p>
 </body>
+</html>
