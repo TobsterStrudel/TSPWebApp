@@ -79,17 +79,30 @@ function svgClick(temp) {
         flag = false;
     }
 }
-function makeArrow(a, b){
+function makeArrow(a, b, color){
     svg.append("line")
         .attr("x1",a[0])
         .attr("y1",a[1])
         .attr("x2",a[0])
         .attr("y2",a[1])
-        .attr("stroke","blue")
+        .attr("stroke",color)
         .attr("stroke-width",2)
         .attr("marker-end","url(#arrow)")
         .transition()
         .duration(900)
+        .attr("x2", b[0])
+        .attr("y2", b[1]);
+}
+function makeLine(a, b, color, width){
+    svg.append("line")
+        .attr("x1",a[0])
+        .attr("y1",a[1])
+        .attr("x2",a[0])
+        .attr("y2",a[1])
+        .attr("stroke",color)
+        .attr("stroke-width",width)
+        .transition()
+        .duration(100)
         .attr("x2", b[0])
         .attr("y2", b[1]);
 }
