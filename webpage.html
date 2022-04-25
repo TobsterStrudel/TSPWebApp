@@ -38,9 +38,12 @@
 <p></p>
 <button onclick="nearestNeighbor(points)">Nearest Neighbor</button>
 <p></p>
-<button onclick="twoApprox(points)">2-Approx</button>
+<button onclick="{
+    twoApprox(points)
+    runTrue();
+}">2-Approx</button>
 <p></p>
-<button onclick="christofides(points)">1.5-Approx</button>
+<!--<button onclick="christofides(points)">1.5-Approx</button>-->
 
 <body>
     <p id="pointsCount">Points: 0</p>

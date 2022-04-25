@@ -29,13 +29,23 @@ function randomPoints(){
     }
 }
 var flag;
+var running;
+function runStatus(){
+    return running;
+}
+function runTrue(){
+    running = true;
+}
 function reset() {
+    running = false;
     d3.selectAll("circle").remove();
     d3.selectAll("text").remove();
     d3.selectAll("line").remove();
     count = 0;
     document.getElementById("pointsCount").innerHTML = "Points: " + count;
     document.getElementById("path").innerHTML = "Path: ";
+    document.getElementById("distance").innerHTML = "Total Distance: ";
+    points = [];
 }
 svg.on("click", svgClick);
 var prevClickLoc = [0,0];
@@ -105,4 +115,5 @@ function makeLine(a, b, color, width){
         .duration(100)
         .attr("x2", b[0])
         .attr("y2", b[1]);
+    running = true;
 }

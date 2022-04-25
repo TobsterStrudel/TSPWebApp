@@ -21,14 +21,14 @@ async function nearestNeighbor(points){
             if(pointstoIdsMap.get(points[j]) === pointstoIdsMap.get(last)){
             }else{
                 makeLine(points[i], points[j], "red", 2);
-                await sleep(100);
+                await sleep(20);
             }
         }
         visited[i] = true;
         let closest = closestPoint(points[i], points, visited); // O(n)
         distance += Math.sqrt(squaredDistance(points[i], closest));
         d3.selectAll("line").attr("stroke", "red").remove();
-        makeLine(points[i], closest, "green");
+        makeLine(points[i], closest, "green", 2);
         pathIds.push(pointstoIdsMap.get(closest)+1);
         last = points[i];
         i = pointstoIdsMap.get(closest);
@@ -39,6 +39,9 @@ async function nearestNeighbor(points){
     document.getElementById("path").innerHTML = "Path: " + pathIds
     document.getElementById("distance").innerHTML = "Total Distance: " + distance.toFixed(2);
     for(let i = 0; i < pathIds.length-1; i++){
+        if(runStatus() === false){
+            break;
+        }
         makeArrow(idsToPointsMap.get(pathIds[i]-1), idsToPointsMap.get(pathIds[i+1]-1), "blue");
         await sleep(900);
     }
