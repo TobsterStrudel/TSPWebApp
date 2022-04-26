@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <meta charset="utf-8" />
-<html>
+<html lang="en-US">
 <h1>Traveling Salesman Problem</h1>
 
 <p>An implementation of three different TSP approximation algorithms</p>
 <dl>
     <dt style="font-size:20px">Nearest Neighbor Algorithm</dt>
     <dd>The path is decided by which point is closest to the current point. Runs in O(n<sup>2</sup>) time, doesn't find most efficient path.</dd><br>
-    <dd>Nearest-Neighbor(<i>P</i>)<br>
+    <dd><b>Nearest-Neighbor(<i>P</i>)</b><br>
         &emsp;Stack <i>path</i><br>
-        &emsp;boolean array <i>V</i> of size <i>P</i> populated with false<br>
+        &emsp;boolean array <i>V</i> of size ||<i>P</i>|| populated with false<br>
         &emsp;<i>path</i>.push(1)<br>
         &emsp;<i>i</i> = 0<br>
         &emsp;<b>while</b>(||<i>path</i>|| < size of ||<i>P</i>||)<br>
@@ -17,15 +17,39 @@
         &emsp;&emsp;<i>closest</i> = closest point to <i>P<sub>i</sub></i><br>
         &emsp;&emsp;<i>path</i>.push(<i>closest</i>)<br>
         &emsp;&emsp;<i>i</i> = <i>closest</i><br>
-        <i>path</i>.push(1)<br>
-            return <i>path</i><br><br>
+        &emsp;<i>path</i>.push(1)<br>
+        &emsp;return <i>path</i><br><br>
 
 
     </dd>
     <dt style="font-size:20px">2-approx Algorithm</dt>
-    <dd>Construct path by creating an MST (Prim's was used in this example) then performing depth-first search. O(n<sup>2</sup>)</dd>
+    <dd>Construct path by creating an MST (Prim's was used in this example) then performing depth-first search. O(n<sup>2</sup>)</dd><br>
+    <dd><b>Two-Approximate</b>(<i>P</i>)<br>
+        &emsp;Stack <i>path</i><br>
+        &emsp;generate complete weighted graph of <i>P</i><br>
+        &emsp;<i>MST</i> = minimum spanning tree of weighted graph<br>
+        &emsp;adjacency matrix <i>A</i> of size ||<i>P</i>|| populated with 0<br>
+        &emsp;<b>for</b>(<i>i</i> in <i>MST</i>)<br>
+        &emsp;&emsp;add <i>i</i> to adjacency matrix<br>
+        &emsp;run depth-first-search on <i>adj</i> and add each visited node to <i>path</i><br>
+        &emsp;<i>path</i>.push(1)<br>
+        &emsp;return <i>path</i><br><br>
+
+
+    </dd>
     <dt style="font-size:20px">1.5-approx Algorithm (Christofides)</dt>
-    <dd>Construct path by creating an MST, find a minimum-cost perfect matching for odd-degree vertices, add edges and form an Eulerian circuit, and then remove all repeated vertices. O(nlogn<sup>3</sup>)</dd>
+    <dd>Construct path by creating an MST, find a minimum-cost perfect matching for odd-degree vertices, add edges and form an Eulerian circuit, and then remove all repeated vertices. O(nlogn<sup>3</sup>)</dd><br>
+    <dd><b>Christofides</b>(<i>P</i>)<br>
+        &emsp;generate complete weighted graph of <i>P</i><br>
+        &emsp;<i>MST</i> = minimum spanning tree of weighted graph<br>
+        &emsp;<i>odd</i> = all the odd degree vertices <i>MST</i><br>
+        &emsp;<i>match</i> = minimum weight matching<br>
+        &emsp;<i>E</i> = Eulerian circuit using edges of <i>match</i> and <i>MST</i><br>
+        &emsp;remove repeated vertices of <i>E</i><br>
+        &emsp;return <i>E</i><br><br>
+
+
+    </dd>
 </dl>
 
 <input type="text" id="numPoints" value="">

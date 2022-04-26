@@ -1,13 +1,29 @@
-function christofides(points){
+async function christofides(points){
+    if(typeof points === 'undefined' || points === null || points.length === 0){
+        return
+    }
+    path = [];
     const map = new Map();
 
     for(let i = 0; i < points.length; i++){
         map.set(i, points[i]);
     }
-    const graph = createGraph(points)
-    console.log(graph);
+    const graph = createGraph(points);
+
+    for(let i = 0; i < graph.size; i++){
+        for(let j = 0; j < graph.size; j++){
+            makeLine(points[i], points[j], "red", 1);
+        }
+    }
     let mst = prims(graph);
-    console.log(mst);
+    for(let i = 0; i < mst.length; i++){
+        if(runStatus() === false){
+            break;
+        }
+        makeLine(map.get(mst[i][0]), map.get(mst[i][1]), "green", 3);
+        await sleep(500);
+    }
+    await sleep(2000)
     let str = "";
     let odd = [];
     let oddPoints = [];
@@ -21,16 +37,48 @@ function christofides(points){
             oddPoints.push(map.get(i));
         }
     }
-    console.log(odd);
     const oddGraph = createGraph(oddPoints)
-    console.log(oddGraph);
-
+    for(let i = 0; i < odd.length; i++){
+        makeCircle(map.get(odd[i]), "blue", 5)
+    }
+    await sleep(2000);
     const matchTree = minimumWeightMatching(mst, graph, odd);
-    console.log(matchTree);
-    const eulerTour = eulerianTour(matchTree, graph);
-    console.log(eulerTour);
+    d3.selectAll("line").remove();
+    for(let i = 0; i < mst.length; i++){
+        if(runStatus() === false){
+            break;
+        }
+        makeLine(map.get(matchTree[i][0]), map.get(matchTree[i][1]), "green", 3);
+        await sleep(500);
+    }
+    await sleep(2000)
+    adj = Array.from(Array(points.length).fill(0), () => new Array(points.length).fill(0))
+    for(let i = 0; i < mst.length; i++){ //building adjacency matrix inside adj
+        addEdge(mst[i][0], mst[i][1]) // 0 & 1 represent parent and child respectively
+    }
+    let visited = new Array(points.length).fill(false);
+    dfs(0,visited);
+    path.push(1);
+    d3.selectAll("line").remove(); //remove any lines made by other functions before printing more
+    let distance = 0.0;
+
+    for(let i = 0; i < path.length-1; i++){
+        distance += Math.sqrt(squaredDistance(map.get(path[i]-1), map.get(path[i+1]-1)));
+    }
+
+    document.getElementById("path").innerHTML = "Path: " + path;
+    document.getElementById("distance").innerHTML = "Total Distance: " + distance.toFixed(2);
+
+    for(let i = 0; i < path.length-1; i++){ //send arrows to UI
+        if(runStatus() === false){
+            break;
+        }
+        makeArrow(map.get(path[i]-1), map.get(path[i+1]-1), "blue");
+        await sleep(900);
+    }
 
 }
+
 function minimumWeightMatching(mst, graph, odd){
 
     shuffle(odd);
@@ -41,69 +89,14 @@ function minimumWeightMatching(mst, graph, odd){
         let length = Number.MAX_VALUE;
         let u = 1;
         let closest = 0;
-        for(u in odd){
-            if(v !== u && graph.get(v)[u][1] < length){
-                length = graph.get(v)[u][1];
-                closest = u;
+        for(let i = 0; i < odd.length; i++){
+            if(v !== u && graph.get(v)[odd[i]][1] < length){
+                length = graph.get(v)[odd[i]][1];
+                closest = odd[i];
             }
         }
         mst.push([v,parseInt(closest)]);
         odd.slice(closest);
     }
     return mst;
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// function eulerianTour(matchTree, graph){
-//     let neighbors = [];
-//     for (let edge in matchTree){
-//         if(!(edge[0] in neighbors)){
-//             neighbors[edge[0]] = [];
-//         }
-//         if(!(edge[1] in neighbors)){
-//             neighbors[edge[1]] = [];
-//         }
-//         neighbors[edge[0]].push(edge[1]);
-//         neighbors[edge[1]].push(edge[0]);
-//     }
-//
-//     let start = matchTree[0][0];
-//     let EP = [neighbors[start[0]]];
-//     let i = 0, v = 0;
-//     while(matchTree.length > 0){
-//         for([i, v] in EP.entries()){
-//             console.log("i: " + i + "\nv: " + v);
-//             if(neighbors[v].length > 0){
-//                 break;
-//             }
-//         }
-//         while(neighbors[v].length > 0){
-//             let w = neighbors[v][0];
-//             matchTree.slice([v,w]);
-//             console.log(matchTree.length);
-//             delete neighbors[v][(neighbors[v].indexOf(w))]
-//             delete neighbors[w][(neighbors[w].indexOf(v))]
-//             i++;
-//             EP.push([i, w]);
-//             v = w;
-//
-//         }
-//     }
-//     return EP;
-// }

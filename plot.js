@@ -123,3 +123,11 @@ function makeLine(a, b, color, width){
         .attr("y2", b[1]);
     running = true;
 }
+function makeCircle(a, color, r){
+    svg.append("circle").attr("r", r)
+        .attr("cx", a[0])
+        .attr("cy", a[1])
+        .style("fill", color)
+        .style("stroke", "black")
+        .style("stroke-width", "2px");
+}
