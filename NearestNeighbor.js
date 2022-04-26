@@ -1,5 +1,7 @@
 
 async function nearestNeighbor(points){
+    d3.selectAll("line").remove();
+    console.log(points);
     if(typeof points === 'undefined' || points === null || points.length === 0){
         return
     }
@@ -20,14 +22,13 @@ async function nearestNeighbor(points){
     let last = points[0];
     let distance = 0.0;
     while(pathIds.length < points.length){ // O(n)
-        if(runStatus() === false){
-            break;
-        }
+        console.log(runStatus())
         for(let j = 0; j < points.length; j++){
-
-            if(pointstoIdsMap.get(points[j]) === pointstoIdsMap.get(last)){
-            }else{
+            if(pointstoIdsMap.get(points[j]) !== pointstoIdsMap.get(last)){
                 makeLine(points[i], points[j], "red", 2);
+                if(runStatus() === false){
+                    break;
+                }
                 await sleep(100);
             }
         }

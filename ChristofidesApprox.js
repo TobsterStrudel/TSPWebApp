@@ -1,4 +1,5 @@
 async function christofides(points){
+    d3.selectAll("line").remove();
     if(typeof points === 'undefined' || points === null || points.length === 0){
         return
     }

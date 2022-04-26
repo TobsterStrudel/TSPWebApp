@@ -40,9 +40,6 @@ var running;
 function runStatus(){
     return running;
 }
-function runTrue(){
-    running = true;
-}
 function reset() {
     running = false;
     d3.selectAll("circle").remove();
