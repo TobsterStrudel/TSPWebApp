@@ -7,14 +7,14 @@
 <dl>
     <dt style="font-size:20px">Nearest Neighbor Algorithm</dt>
     <dd>The path is decided by which point is closest to the current point. Runs in O(n<sup>2</sup>) time, doesn't find most efficient path.</dd><br>
-    <dd>nearestNeighbor(<i>points</i>)<br>
+    <dd>Nearest-Neighbor(<i>P</i>)<br>
         &emsp;Stack <i>path</i><br>
-        &emsp;boolean <i>visited</i>[<i>points</i>.size] populated with false<br>
+        &emsp;boolean array <i>V</i> of size <i>P</i> populated with false<br>
         &emsp;<i>path</i>.push(1)<br>
         &emsp;<i>i</i> = 0<br>
-        &emsp;while (<i>path</i>.size < <i>points</i>.size)<br>
-        &emsp;&emsp;<i>visited</i>[<i>i</i>] = true<br>
-        &emsp;&emsp;<i>closest</i> = closest point to <i>points</i>[<i>i</i>]<br>
+        &emsp;<b>while</b>(||<i>path</i>|| < size of ||<i>P</i>||)<br>
+        &emsp;&emsp;<i>V<sub>i</sub></i> = true<br>
+        &emsp;&emsp;<i>closest</i> = closest point to <i>P<sub>i</sub></i><br>
         &emsp;&emsp;<i>path</i>.push(<i>closest</i>)<br>
         &emsp;&emsp;<i>i</i> = <i>closest</i><br>
         <i>path</i>.push(1)<br>
