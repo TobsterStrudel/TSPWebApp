@@ -1,6 +1,6 @@
 
 \documentclass[11pt]{article}
-
+	\usepackage{algorithm,algpseudocode}
     \title{\textbf{Traveling Salesman Problem}}
     \author{Tobias Dault}
     \date{29 April 2020}
@@ -18,6 +18,16 @@
 
 \section{Introduction}
 The famous Traveling Salesman problem (TSP) states: Given a list of cities and the distances between each pair of cities, what is the shortest possible route that visits each city exactly once and returns to the origin city? I implemented 3 popular approximation algorithms in an easy to use web-application using JavaScript.
+\begin{algorithm}
+	\caption{Nearest Neighbor}
+	\begin{algorithmic}
+		\State Stack $\emph{path}$
+		
+		\While{$|\emph{path}| < |\emph{P}|$}
+			\State test
+		\EndWhile
+	\end{algorithmic}
+\end{algorithm}
 
 \section{Nearest Neighbor}
 The path is decided by which point is closest to the current point. No guaranteed approximation. $O(n^2)$ time
