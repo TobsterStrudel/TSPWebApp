@@ -1,19 +1,34 @@
-\documentclass[12pt]{article}
-\usepackage[english]{babel}
-\usepackage[utf8x]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{listings}
 
-\Scribe{Your Name}
-\Lecturer{Alexandre Street}
-\LectureNumber{N}
-\LectureDate{DATE}
-\LectureTitle{A title for the lecture}
+\documentclass[11pt]{article}
 
-\lstset{style=mystyle}
+    \title{\textbf{Traveling Salesman Problem}}
+    \author{Tobias Dault}
+    \date{29 April 2020}
+    
+    \addtolength{\topmargin}{-5cm}
+    \addtolength{\textheight}{3cm}
+    
 
+
+    
 \begin{document}
-	\MakeScribeTop
 
+\maketitle
+\thispagestyle{empty}
+
+\section{Introduction}
+The famous Traveling Salesman problem (TSP) states: Given a list of cities and the distances between each pair of cities, what is the shortest possible route that visits each city exactly once and returns to the origin city? I implemented 3 popular approximation algorithms in an easy to use web-application using JavaScript.
+
+\section{Nearest Neighbor}
+The path is decided by which point is closest to the current point. No guaranteed approximation. $O(n^2)$ time
+
+
+
+\section{2-Approximate}
+Construct path by creating an MST (Prim's was used in this example) then performing depth-first search. $O(n^2)$ time
+
+\section{Christofides (1.5-Approximate)}
+Construct path by creating an MST, find a minimum-cost perfect matching for odd-degree vertices, add edges to MST and form an Eulerian circuit, and then remove all repeated vertices. $O(n^3)$ time
 
 \end{document}
+
