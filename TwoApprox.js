@@ -12,14 +12,14 @@ async function twoApprox(points){
         idsToPointsMap.set(i, points[i]);
     }
 
-    const graph = createGraph(points);
+    const completeGraph = createGraph(points);
 
-    for(let i = 0; i < graph.size; i++){
-        for(let j = 0; j < graph.size; j++){
+    for(let i = 0; i < completeGraph.size; i++){
+        for(let j = 0; j < completeGraph.size; j++){
             makeLine(points[i], points[j], "red", 1);
         }
     }
-    let mst = prims(graph);
+    let mst = prims(completeGraph);
     for(let i = 0; i < mst.length; i++){
         if(runStatus() === false){
             break;
